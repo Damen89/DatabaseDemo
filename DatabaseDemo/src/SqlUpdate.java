@@ -6,7 +6,7 @@ import java.sql.Statement;
 
 //gli import sono tutti di java.sql
 
-public class Connessione {
+public class SqlUpdate {
 	
 	
 	
@@ -28,13 +28,24 @@ public class Connessione {
 		//2 crea uno statement
 		mioStat = miaConn.createStatement();
 		
-		//3 esegui una Query Sql
+		//3 Inserisco un nuovo record
+		System.out.println("modifico alcuni record");
+		
+		
+		//4 esegui una Query Sql
+		String sql = "UPDATE studenti SET eta = (eta + 10) WHERE 'sesso' = 'F'";
+		
+		int righeInteressate = mioStat.executeUpdate(sql);
+	
+		System.out.println("per la precisione " + righeInteressate + "record");
+		//5 aggiorna elenco studenti
 		rs = mioStat.executeQuery("select * from js2017.studenti");
 		
-		//4 processa il resultSer., il metodo next() sposta il cursore in avanti di una posizione e lo fa fin quando ci sono record
+		//6 processa il resultSet, il metodo next() sposta il cursore in avanti di una posizione e lo fa fin quando ci sono record
 			while(rs.next()){
 				System.out.print(rs.getString("nome") + "\t");  //richiamo il tipo del dato 
 				System.out.println(rs.getString("cognome"));  
+				System.out.println(rs.getString("eta"));  
 			}
 			
 			
